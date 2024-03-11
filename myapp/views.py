@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from .models import Resource, Mark, Announcement
 import datetime
 
+
 def my_login_view(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
@@ -50,9 +51,8 @@ def register(request):
         form = StudentSignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.backend = 'django.contrib.auth.backends.ModelBackend'
             user.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
     else:
         form = StudentSignUpForm()
