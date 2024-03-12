@@ -37,7 +37,7 @@
         h1 {
             color: #64444D; 
             font-family: 'Garamond', serif;
-            font-size: 36px; 
+            font-size: 45px; 
         }
         h2 {
             color: #7994B7; 
@@ -61,7 +61,7 @@
             border-radius: 5px;
             cursor: pointer;
             position: absolute;
-            top: 10px;
+            top: 35px;
             right: 40px;
         }
         .column.card { 
@@ -78,15 +78,65 @@
         .container {
          position: relative; 
         }
-        li {
-         list-style-type: disc; 
-        margin-left: 20px;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 0.9em;
+            border: 1px solid #dddddd;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
+        }
+
+        th:first-child, td:first-child {
+            border-left: 1px solid #dddddd;
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        thead th {
+            background-color: #f8f9fa;
+            color: #777777;
+            text-transform: uppercase;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+
+        tbody tr:hover {
+            background-color: #ececec;
         }
     </style>
 </head>
 
 <body>
     <div class="container">  
+        <br>
         <h1>{{ welcome_message }}</h1>
         <h3>Hello, {{ user.username }}!</h3>
         <form action="{% url 'logout' %}" method="post">
@@ -97,44 +147,81 @@
         <div class="dashboard">
             <div class="column card bg-light"> 
                 <h2><i class="bi bi-sticky"></i>  Notes/Resources</h2>
-                <ul>
-                    {% for resource in resources %}
-                        <li><a href="{{ resource.link }}">{{ resource.title }}</a></li>
-                    {% empty %}
-                        <p>No resources available.</p>
-                    {% endfor %}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for resource in resources %}
+                            <tr>
+                                <td>{{ resource.title }}</td>
+                                <td><a href="{{ resource.link }}">{{ resource.link }}</a></td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="2">No resources available.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
 
             <div class="column card bg-light"> 
                 <h2><i class="bi bi-award"></i>  Marks</h2>
-                <ul>
-                    {% for mark in marks %}
-                        <li>{{ mark.assignment_title }}: {{ mark.score }}</li>
-                    {% empty %}
-                        <p>No marks available.</p>
-                    {% endfor %}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Assignment Title</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mark in marks %}
+                            <tr>
+                                <td>{{ mark.assignment_title }}</td>
+                                <td>{{ mark.score }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="2">No marks available.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
 
             <div class="column card bg-light"> 
                 <h2><i class="bi bi-megaphone"></i>  Announcements</h2>
-                <ul>
-                    {% for announcement in announcements %}
-                    <li>
-                        <strong>{{ announcement.created_at|date:"D, d M Y H:i" }}</strong> -
-                        {{ announcement.message }}
-                        <em>{% if announcement.for_all %}
-                            Broadcast
-                        {% else %}
-                            Private
-                        {% endif %}
-                        </em>
-                    </li>
-                    {% empty %}
-                    <p>No announcements.</p>
-                    {% endfor %}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Message</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for announcement in announcements %}
+                            <tr>
+                                <td>{{ announcement.created_at|date:"D, d M Y H:i" }}</td>
+                                <td>{{ announcement.message }}</td>
+                                <td>{% if announcement.for_all %}
+                                        Broadcast
+                                    {% else %}
+                                        Private
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">No announcements.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
