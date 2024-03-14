@@ -14,7 +14,6 @@ class Resource(models.Model):
 
 # Model for the announcements
 
-
 class Announcement(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
