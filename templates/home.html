@@ -67,6 +67,11 @@
             text-decoration: none;
             color: #64444D;
             font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            max-width: 100%;
         }
 
         ul li a:hover {
@@ -136,13 +141,19 @@
         <div class="dashboard">
             <div class="column card bg-light">
                 <h2><i class="bi bi-sticky"></i>  Notes/Resources</h2>
-                <ul>
-                    {% for resource in resources %}
-                    <li><a href="{{ resource.link }}">{{ resource.title }}</a></li>
-                    {% empty %}
-                    <li>No resources available.</li>
-                    {% endfor %}
-                </ul>
+                <table>
+                    <tbody>
+                        {% for resource in resources %}
+                        <tr>
+                            <td><a href="{{ resource.link }}">{{ resource.title }}</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No resources available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
 
             <div class="column card bg-light">
