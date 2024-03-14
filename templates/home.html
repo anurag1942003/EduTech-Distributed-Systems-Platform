@@ -13,8 +13,8 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            background-color:#E8E8E8;
-            color:#64444D;
+            background-color: #E8E8E8;
+            color: #64444D;
         }
 
         .dashboard {
@@ -30,31 +30,51 @@
         }
 
         .column {
-            padding: 10px; 
-            border-radius: 5px;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: #FFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
         }
 
         h1 {
-            color: #64444D; 
+            color: #64444D;
             font-family: 'Garamond', serif;
-            font-size: 45px; 
+            font-size: 45px;
         }
+
         h2 {
-            color: #7994B7; 
-            font-family:  'Garamond', serif;
-            font-size: 30px; 
+            color: #7994B7;
+            font-family: 'Garamond', serif;
+            font-size: 30px;
         }
-        .card { 
+
+        .card {
             margin-bottom: 15px;
         }
 
         ul {
-            list-style-type: disc;
-            margin-left: 20px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #64444D;
+            font-weight: bold;
+        }
+
+        ul li a:hover {
+            color: #7994B7;
         }
 
         button[type="submit"] {
-            background-color:#64444D;
+            background-color: #64444D;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -64,26 +84,26 @@
             top: 35px;
             right: 40px;
         }
-        .column.card { 
-            margin-bottom: 15px;
-            transition: transform 0.2s ease; 
-        }
 
         .column.card:hover {
-            transform: scale(1.05);  
+            transform: scale(1.05);
         }
+
         h2 i {
-             color: #7994B7;
+            color: #7994B7;
         }
+
         .container {
-         position: relative; 
+            position: relative;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #dddddd;
             padding: 8px;
             text-align: left;
@@ -91,37 +111,6 @@
 
         th {
             background-color: #f2f2f2;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-spacing: 0;
-            font-size: 0.9em;
-            border: 1px solid #dddddd;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #dddddd;
-            border-right: 1px solid #dddddd;
-        }
-
-        th:first-child, td:first-child {
-            border-left: 1px solid #dddddd;
-        }
-
-        th:last-child, td:last-child {
-            border-right: none;
-        }
-
-        thead th {
-            background-color: #f8f9fa;
-            color: #777777;
-            text-transform: uppercase;
         }
 
         tbody tr:nth-child(even) {
@@ -135,7 +124,7 @@
 </head>
 
 <body>
-    <div class="container">  
+    <div class="container">
         <br>
         <h1>{{ welcome_message }}</h1>
         <h3>Hello, {{ user.username }}!</h3>
@@ -145,31 +134,18 @@
         </form>
         <br><br><br>
         <div class="dashboard">
-            <div class="column card bg-light"> 
+            <div class="column card bg-light">
                 <h2><i class="bi bi-sticky"></i>  Notes/Resources</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for resource in resources %}
-                            <tr>
-                                <td>{{ resource.title }}</td>
-                                <td><a href="{{ resource.link }}">{{ resource.link }}</a></td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="2">No resources available.</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <ul>
+                    {% for resource in resources %}
+                    <li><a href="{{ resource.link }}">{{ resource.title }}</a></li>
+                    {% empty %}
+                    <li>No resources available.</li>
+                    {% endfor %}
+                </ul>
             </div>
 
-            <div class="column card bg-light"> 
+            <div class="column card bg-light">
                 <h2><i class="bi bi-award"></i>  Marks</h2>
                 <table>
                     <thead>
@@ -180,20 +156,20 @@
                     </thead>
                     <tbody>
                         {% for mark in marks %}
-                            <tr>
-                                <td>{{ mark.assignment_title }}</td>
-                                <td>{{ mark.score }}</td>
-                            </tr>
+                        <tr>
+                            <td>{{ mark.assignment_title }}</td>
+                            <td>{{ mark.score }}</td>
+                        </tr>
                         {% empty %}
-                            <tr>
-                                <td colspan="2">No marks available.</td>
-                            </tr>
+                        <tr>
+                            <td colspan="2">No marks available.</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
 
-            <div class="column card bg-light"> 
+            <div class="column card bg-light">
                 <h2><i class="bi bi-megaphone"></i>  Announcements</h2>
                 <table>
                     <thead>
@@ -205,20 +181,20 @@
                     </thead>
                     <tbody>
                         {% for announcement in announcements %}
-                            <tr>
-                                <td>{{ announcement.created_at|date:"D, d M Y H:i" }}</td>
-                                <td>{{ announcement.message }}</td>
-                                <td>{% if announcement.for_all %}
-                                        Broadcast
-                                    {% else %}
-                                        Private
-                                    {% endif %}
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{ announcement.created_at|date:"D, d M Y H:i" }}</td>
+                            <td>{{ announcement.message }}</td>
+                            <td>{% if announcement.for_all %}
+                                Broadcast
+                                {% else %}
+                                Private
+                                {% endif %}
+                            </td>
+                        </tr>
                         {% empty %}
-                            <tr>
-                                <td colspan="3">No announcements.</td>
-                            </tr>
+                        <tr>
+                            <td colspan="3">No announcements.</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -227,16 +203,16 @@
     </div>
     <script>
         const cards = document.querySelectorAll('.column.card');
-      
+
         cards.forEach(card => {
-          card.addEventListener('mouseenter', () => {
-            card.style.transform = 'scale(1.05)'; 
-          });
-      
-          card.addEventListener('mouseleave', () => {
-            card.style.transform = 'scale(1)';  
-          });
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.05)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
         });
-      </script>
+    </script>
 </body>
 </html>
