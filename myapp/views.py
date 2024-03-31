@@ -38,7 +38,7 @@ def home_view(request):
         specific_student=request.user)).order_by('-created_at')
     context = {
         'user': request.user,
-        'welcome_message': "STUDENT DASHBOARD",
+        'welcome_message': "Distributed Systems Dashboard",
         'resources': resources,
         'marks': marks,
         'announcements': announcements,
