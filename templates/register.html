@@ -8,29 +8,39 @@
     <style>
         body {
             font-family: 'Garamond', serif;
-            background-color: #E8E8E8;
-            color: #57b2d0;
+            background-color: white;
+            color: #303256;
             padding-top: 50px; 
-            background-image: url('../static/images/bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        }
+
+        .image-column {
+            text-align: left;
+        }
+
+        .login-image {
+            width: 600px;
+            height: 550px;
+        }
+
+        .form-column {
+            margin-top: 1px;
+            padding-right: 1px;
         }
 
         .form-container {
-            width: 360px; 
+            width: 320px;
             margin: auto;
             padding: 40px;
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 0 20px #87CEEB;
-            margin-top: 100px;
+            box-shadow: 0 0 20px #a9e0ef;
+            margin-top: 1px;
         }
 
         h2 {
             margin-bottom: 20px;
             font-size: 28px;
-            color: #0087b7;
+            color: #5d6be7;
         }
 
         form {
@@ -56,7 +66,7 @@
         button[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #fd7e14;
+            background-color: #303256;
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -66,7 +76,7 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #fd7e14;
+            background-color: #827bd3;
         }
 
         .already-account {
@@ -83,8 +93,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6 image-column">
+                <img src="../static/images/new.jpg" alt="Login Image" class="login-image">
+            </div>
+            <div class="col-md-6 form-column justify-content-end d-flex">
                 <div class="form-container">
                     <h2 class="mb-4">SIGN UP</h2>
                     <form method="post">
@@ -96,14 +109,12 @@
                         </div>
                         <div class="form-group">
                             <label for="id_student_name">Student Name:</label>
-                            <input type="text" name="student_name" id="id_student_name" class="form-control"
-                                required>
+                            <input type="text" name="student_name" id="id_student_name" class="form-control" required>
                             {{ form.student_name.errors }}
                         </div>
                         <div class="form-group">
                             <label for="id_registration_number">Registration Number:</label>
-                            <input type="text" name="registration_number" id="id_registration_number"
-                                class="form-control" required>
+                            <input type="text" name="registration_number" id="id_registration_number" class="form-control" required>
                             {{ form.registration_number.errors }}
                         </div>
                         <div class="form-group">
