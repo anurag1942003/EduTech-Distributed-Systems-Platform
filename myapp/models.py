@@ -39,3 +39,13 @@ class Mark(models.Model):
 
     def __str__(self):
         return f"{self.assignment_title} - {self.student.username} ({self.score})"
+
+
+class Query(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={
+                                'groups__name': "Students"})
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Query from {self.student.username} at {self.timestamp}"
