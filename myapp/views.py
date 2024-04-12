@@ -9,7 +9,7 @@ from django.contrib.auth import logout
 from .models import Resource, Mark, Announcement, Query
 import datetime
 from django.contrib import messages
-
+from django.http import HttpResponse
 
 def my_login_view(request):
     if request.user.is_authenticated:
@@ -74,3 +74,11 @@ def submit_query(request):
         messages.success(request, 'Submitted query successfully')
         return redirect('/home')
     return redirect('/home')
+
+def submit_feedback_view(request):
+    if request.method == 'POST':
+        # Process the submitted feedback data here
+        return HttpResponse('Feedback submitted successfully!')
+    else:
+        # Render the feedback form
+        return render(request, 'feedback_form.html')
