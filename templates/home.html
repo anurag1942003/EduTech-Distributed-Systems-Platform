@@ -153,29 +153,7 @@ tbody tr:hover {
 }
 
 .query-form {
-    position: absolute;
-    bottom: -500px;
-    right: 20px;
-    max-width: 600px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: bottom 0.5s ease;
-}
-
-.query-form button[type="submit"] {
-    background-color: #3e8eb9; 
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.submit-btn {
-    text-align: center;
-    margin-top: 20px;
+    display: none; /* Remove query form */
 }
 
 .feedback-btn {
@@ -191,7 +169,6 @@ tbody tr:hover {
 }
 
 .feedback-form {
-    display: none;
     background-color: #fff;
     padding: 20px;
     border-radius: 12px;
@@ -209,7 +186,12 @@ tbody tr:hover {
     padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
+    left: 50px;
 }
+
+.feedback-form {
+            display: none;
+        }
 
 #logoutButton {
     background-color: #303256;
@@ -339,7 +321,7 @@ tbody tr:hover {
     {% endif %}
 
     <button class="feedback-btn" onclick="toggleFeedback()">Submit Feedback</button>
-
+ <div id="feedbackFormContainer">
     <div class="feedback-form" id="feedbackForm">
         <form action="{% url 'submit_feedback' %}" method="post">
             {% csrf_token %}
@@ -354,20 +336,7 @@ tbody tr:hover {
             </div>
         </form>
     </div>
-
-    <div class="query-form">
-        <form action="{% url 'submit_query' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="queryMessage">Enter your query:</label>
-                <textarea class="form-control" id="queryMessage" name="message" rows="3"></textarea>
-            </div>
-            <div class="submit-btn">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
-
+</div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -387,6 +356,8 @@ tbody tr:hover {
 
         function toggleFeedback() {
             const feedbackForm = document.getElementById('feedbackForm');
+            // Get the container element
+            const feedbackFormContainer = document.getElementById('feedbackFormContainer');
             if (feedbackForm.style.display === 'none' || feedbackForm.style.display === '') {
                 feedbackForm.style.display = 'block';
             } else {
