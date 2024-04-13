@@ -57,7 +57,7 @@ h1 {
     font-size: 45px;
 }
 
-h3 {
+h3,h4 {
     color: black;
     font-family: 'Garamond', serif;
     font-size: 25px;
@@ -217,6 +217,7 @@ tbody tr:hover {
     <div class="container">
         <br>
         <h1>{{ welcome_message }}</h1>
+        <h4><strong>CSE 3251 Distributed Systems, Department of Computer Science</strong></h4>
         <h3>Hello, {{ user.username }}!</h3>
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
