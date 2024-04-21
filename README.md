@@ -34,8 +34,3 @@ To set up the project locally, follow these steps:
 
 ## Contributions:
 Contributions to the project are welcome. Please follow the standard GitHub workflow for making contributions, including forking the repository, creating a new branch for your changes, and submitting a pull request.
-
-## License:
-This project is licensed under the [insert license here]. See the LICENSE file for details.
-
-For any questions or inquiries, please contact the project team at [insert contact email].
